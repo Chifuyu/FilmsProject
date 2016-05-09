@@ -13,8 +13,8 @@ namespace MovieRental.DAL
         {
             for (int i = 0; i < 10; i++)
                 context.Movies.Add(new Movie() { Name = String.Format("Movie {0}", i + 1) });
-
-            base.Seed(context);
+            context.SaveChanges();
+            //base.Seed(context);
         }
     }
 }

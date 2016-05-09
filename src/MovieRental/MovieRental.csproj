@@ -163,9 +163,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605061745347_InitialCreate.cs" />
+    <Compile Include="Migrations\201605061745347_InitialCreate.Designer.cs">
+      <DependentUpon>201605061745347_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605092000427_update_dm1.cs" />
+    <Compile Include="Migrations\201605092000427_update_dm1.Designer.cs">
+      <DependentUpon>201605092000427_update_dm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Director.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +231,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201605061745347_InitialCreate.resx">
+      <DependentUpon>201605061745347_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605092000427_update_dm1.resx">
+      <DependentUpon>201605092000427_update_dm1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

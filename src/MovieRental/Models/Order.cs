@@ -9,7 +9,17 @@ namespace MovieRental.Models
     {
         #region Properties
 
-        public int Price { get; set; }
+        public virtual Client Owner { get; set; }
+
+        public DateTime From { get; set; }
+
+        public DateTime To { get; set; }
+
+        public virtual Movie Movie { get; set; }
+
+        public int Rent { get; set; }
+
+        public string Comment { get; set; }
 
         #endregion
         #region Methods
