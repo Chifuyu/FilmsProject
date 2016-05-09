@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Styles.Render("~/Content/css")
+    Scripts.Render("~/bundles/modernizr")-->
+    <link href="~/Content/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+<body>
+    <div style="height:260px; background-color:darkcyan;"></div>
+    <div class="movies-block">
+        <div style="padding:10px"><b>Movies</b></div>
+        <table>
+            @foreach (var item in ViewBag.Movies)
+            {
+                <tr>
+                    <td><b>@item.Name</b></td>
+                    <td>#@item.Id</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
