@@ -7,6 +7,6 @@ namespace MovieRental.Models
 {
     public class Director : Person
     {
-
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

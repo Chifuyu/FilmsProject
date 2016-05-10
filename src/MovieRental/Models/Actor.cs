@@ -7,5 +7,11 @@ namespace MovieRental.Models
 {
     public class Actor : Person
     {
+        public Actor()
+        {
+            Movies = new List<Movie>();
+        }
+
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

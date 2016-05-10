@@ -163,17 +163,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605061745347_InitialCreate.cs" />
-    <Compile Include="Migrations\201605061745347_InitialCreate.Designer.cs">
-      <DependentUpon>201605061745347_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605092000427_update_dm1.cs" />
-    <Compile Include="Migrations\201605092000427_update_dm1.Designer.cs">
-      <DependentUpon>201605092000427_update_dm1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605101103372_update_dm2.cs" />
-    <Compile Include="Migrations\201605101103372_update_dm2.Designer.cs">
-      <DependentUpon>201605101103372_update_dm2.cs</DependentUpon>
+    <Compile Include="Migrations\201605101216373_init.cs" />
+    <Compile Include="Migrations\201605101216373_init.Designer.cs">
+      <DependentUpon>201605101216373_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Actor.cs" />
@@ -214,7 +206,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -237,14 +231,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605061745347_InitialCreate.resx">
-      <DependentUpon>201605061745347_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605092000427_update_dm1.resx">
-      <DependentUpon>201605092000427_update_dm1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605101103372_update_dm2.resx">
-      <DependentUpon>201605101103372_update_dm2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605101216373_init.resx">
+      <DependentUpon>201605101216373_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

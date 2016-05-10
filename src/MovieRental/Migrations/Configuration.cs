@@ -1,5 +1,6 @@
 namespace MovieRental.Migrations
 {
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -10,7 +11,6 @@ namespace MovieRental.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "MovieRental.DAL.Context";
         }
 
         protected override void Seed(MovieRental.DAL.Context context)
@@ -27,6 +27,9 @@ namespace MovieRental.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            for (int i = 0; i < 10; i++)
+                context.Movies.Add(new Movie() { Name = String.Format("Movie {0}", i + 1) });
+            context.SaveChanges();
         }
     }
 }

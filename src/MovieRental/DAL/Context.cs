@@ -17,6 +17,11 @@ namespace MovieRental.DAL
         }
 
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<Actor> Actors { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Director> Directors { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -28,9 +33,8 @@ namespace MovieRental.DAL
             modelBuilder.Entity<Movie>().HasKey<int>(x => x.Id);
             modelBuilder.Entity<Movie>().Property(x => x.Name).HasMaxLength(255).IsRequired();*/
             //modelBuilder.Entity<Movie>().Map(delegate(EntityMappingConfiguration<Movie>))
-
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new MovieConfiguration());
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
