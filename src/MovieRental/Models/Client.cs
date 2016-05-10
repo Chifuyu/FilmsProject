@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MovieRental.Models
 {
-    public class Client : BaseEntity
+    public class Client : Person
     {
         public string PhoneNumber { get; set; }
         public virtual ICollection<Order> Orders { get; set; }

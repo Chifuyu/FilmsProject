@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MovieRental.Models
 {
-    public class Actor : BaseEntity
+    public class Actor : Person
     {
     }
 }
