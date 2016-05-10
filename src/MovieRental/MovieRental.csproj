@@ -167,6 +167,10 @@
     <Compile Include="Migrations\201605101216373_init.Designer.cs">
       <DependentUpon>201605101216373_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605102000472_db_update_1.cs" />
+    <Compile Include="Migrations\201605102000472_db_update_1.Designer.cs">
+      <DependentUpon>201605102000472_db_update_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -233,6 +237,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605101216373_init.resx">
       <DependentUpon>201605101216373_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605102000472_db_update_1.resx">
+      <DependentUpon>201605102000472_db_update_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
