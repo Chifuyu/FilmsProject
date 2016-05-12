@@ -6,14 +6,15 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Configuration;
 using MovieRental.Models;
 using MovieRental.DAL.Mapping;
+using MovieRental.Migrations;
 
 namespace MovieRental.DAL
 {
     public class Context : DbContext
     {
-        public Context() : base("name=DbConnectionString")
+        public Context() : base()
         {
-            Database.SetInitializer<Context>(new MoviesDbInitializer());
+            Database.SetInitializer<Context>(new MigrateDatabaseToLatestVersion<Context,Configuration>() );
         }
 
         public DbSet<Movie> Movies { get; set; }
@@ -33,7 +34,7 @@ namespace MovieRental.DAL
             modelBuilder.Entity<Movie>().HasKey<int>(x => x.Id);
             modelBuilder.Entity<Movie>().Property(x => x.Name).HasMaxLength(255).IsRequired();*/
             //modelBuilder.Entity<Movie>().Map(delegate(EntityMappingConfiguration<Movie>))
-            modelBuilder.Configurations.Add(new MovieConfiguration());
+            //modelBuilder.Configurations.Add(new MovieConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
