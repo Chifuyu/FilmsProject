@@ -12,12 +12,7 @@ namespace MovieRental.Controllers
     {
         public ActionResult Index()
         {
-            using (var context = new Context())
-            {
-                ViewBag.Movies = context.Movies.ToList<Movie>();
-            }
-
-            return View();
+            return RedirectToAction("Index", "Movies");
         }
     }
 }

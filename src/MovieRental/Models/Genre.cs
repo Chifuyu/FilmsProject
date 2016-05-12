@@ -7,11 +7,13 @@ namespace MovieRental.Models
 {
     public class Genre : BaseEntity
     {
-        public Genre(string name)
+        public Genre()
         {
-            Name = name;
+            Movies = new List<Movie>();
         }
 
-        public string Name { get; private set; }
+        public string Name { get; set; }
+
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

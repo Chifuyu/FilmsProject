@@ -24,10 +24,6 @@ namespace MovieRental.Models
         #endregion
         #region Methods
 
-        public Order()
-        {
-
-        }
 
         #endregion
     }

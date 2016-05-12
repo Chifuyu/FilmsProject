@@ -34,7 +34,9 @@ namespace MovieRental.Models
 
         public Movie()
         {
-
+            Directors = new List<Director>();
+            Actors = new List<Actor>();
+            ListOfGenres = new List<Genre>();
         }
 
         #endregion

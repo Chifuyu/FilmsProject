@@ -7,13 +7,13 @@ namespace MovieRental.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class update_dm2 : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(update_dm2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201605101103372_update_dm2"; }
+            get { return "201605121207108_init"; }
         }
         
         string IMigrationMetadata.Source
