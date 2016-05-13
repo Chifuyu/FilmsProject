@@ -36,10 +36,20 @@ namespace MovieRental.Controllers
             return View(order);
         }
 
-        // GET: Orders/Create
-        public ActionResult Create()
+        // GET: Orders/Create?movieId=5
+        public ActionResult Create(int movieId)
         {
-            return View();
+            var movie = db.Movies.Find(movieId);
+
+            if (movie != null)
+            {
+                var order = new Order { Movie = movie, MovieId = movieId, Owner = new Client() };
+                return View(order);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Movies");
+            }
         }
 
         // POST: Orders/Create
@@ -47,12 +57,24 @@ namespace MovieRental.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,From,To,Rent,Comment")] Order order)
+        public ActionResult Create(/*[Bind(Include = "Id,From,To,Rent,Comment")]*/ Order order)
         {
             if (ModelState.IsValid)
             {
+                var owner = db.Clients.FirstOrDefault(
+                    client => client.FirstName == order.Owner.FirstName
+                           && client.LastName == order.Owner.LastName
+                           && client.PhoneNumber == order.Owner.PhoneNumber
+                );
+
+                if (owner != null)
+                {
+                    order.Owner = owner;
+                }
+
                 db.Orders.Add(order);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 

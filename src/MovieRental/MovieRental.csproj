@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201605121042233_name.Designer.cs">
       <DependentUpon>201605121042233_name.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605131105384_order_movie_id.cs" />
+    <Compile Include="Migrations\201605131105384_order_movie_id.Designer.cs">
+      <DependentUpon>201605131105384_order_movie_id.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -305,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605121042233_name.resx">
       <DependentUpon>201605121042233_name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605131105384_order_movie_id.resx">
+      <DependentUpon>201605131105384_order_movie_id.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
