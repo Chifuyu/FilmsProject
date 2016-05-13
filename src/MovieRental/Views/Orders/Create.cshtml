@@ -77,31 +77,36 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Order" class="btn btn-default" />
+                <input type="submit" value="Order" class="btn btn-default" style="width: 100%" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="btn-group">
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index","Movies")'">
+        Back to List of movies
+    </button>
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index","Orders")'">
+        Go to List of orders
+    </button>
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
 
-<script>
+        <script>
     function calculateRentPrice() {
         var from = new Date($("#From").val());
         var to = new Date($("#To").val());
 
         var dateDifferenceInDays = (to.getTime() - from.getTime()) / (24*60*60*1000);
         var rentPrice = @Model.Movie.Price * (dateDifferenceInDays + 1);
-        
+
         $("#Rent").val(rentPrice.toString());
     }
 
     $("#To").change(calculateRentPrice);
     $("#From").change(calculateRentPrice);
-</script>
-}
+        </script>
+    }

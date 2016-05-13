@@ -106,7 +106,7 @@ namespace MovieRental.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(order).State = EntityState.Modified;
-                db.SaveChanges();
+                db.SaveChanges(); //exception when save modified order!
                 return RedirectToAction("Index");
             }
             return View(order);
