@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201605121042233_name.Designer.cs">
       <DependentUpon>201605121042233_name.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605131105384_order_movie_id.cs" />
+    <Compile Include="Migrations\201605131105384_order_movie_id.Designer.cs">
+      <DependentUpon>201605131105384_order_movie_id.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -253,7 +257,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Movies\Create.cshtml" />
     <Content Include="Views\Movies\Delete.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
@@ -284,9 +287,12 @@
     <Content Include="Views\Genres\Details.cshtml" />
     <Content Include="Views\Genres\Edit.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
+    <Content Include="Views\Movies\About.cshtml" />
+    <Content Include="Views\Movies\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -305,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605121042233_name.resx">
       <DependentUpon>201605121042233_name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605131105384_order_movie_id.resx">
+      <DependentUpon>201605131105384_order_movie_id.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

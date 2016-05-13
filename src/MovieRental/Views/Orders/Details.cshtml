@@ -44,7 +44,12 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="btn-group">
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Edit", new { id = Model.Id })'">
+        Edit
+    </button>
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index")'">
+        Back to List
+    </button>
+</div>
