@@ -82,7 +82,10 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <button type="button" class="btn btn-default buttons" onclick="location.href='@Url.Action("Index")'">
+        Back to List
+    </button>
+    
 </div>
 
 @section Scripts {

@@ -1,9 +1,46 @@
-﻿.movies-block
+﻿/* The main header*/
+.header{
+    background-image: url("Images/Up.jpg");
+    color: white;
+}
+
+/* Main Theme */
+.movies-theme
 {
     margin-top: -20px;
     margin-left: auto;
     margin-right: auto;
     width: 800px;
-    background-color: white;
-    border: 1px solid
+    height: 100%;
+    background-image: linear-gradient(#34353d, #1b1c1f);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #69778b;
+}
+.movies-index
+{
+    margin-top: 50px;
+    background-image: linear-gradient(#ffffff, #d9dccc);
+}
+.buttons{
+    width: 100%;
+}
+
+.zoom img {
+    background-size: contain;
+    width: 100px;
+    position: relative;
+    -webkit-transition: all 2s ease;
+    -moz-transition: all 2s ease;
+    -ms-transition: all 2s ease;
+    -o-transition: all 2s ease;
+    transition: all 2s ease;
+}
+
+.zoom img:hover {
+    background-size: contain;
+    margin-left: -50%;
+    width: 300%;
+    position: relative;
+    box-shadow: 0 0 40px rgba(67, 70, 32, 0.60), inset 0 0 40px rgb(236, 242, 101);
 }
