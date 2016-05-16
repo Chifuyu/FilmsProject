@@ -92,21 +92,26 @@
     </button>
 </div>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 
-        <script>
-    function calculateRentPrice() {
-        var from = new Date($("#From").val());
-        var to = new Date($("#To").val());
+    <script>
+        
+        const fromBoxId = "#@nameof(Model.From)";
+        const toBoxId   = "#@nameof(Model.To)";
+        const rentBoxId = "#@nameof(Model.Rent)";
 
-        var dateDifferenceInDays = (to.getTime() - from.getTime()) / (24*60*60*1000);
-        var rentPrice = @Model.Movie.Price * (dateDifferenceInDays + 1);
+        function calculateRentPrice() {
+            var from = new Date($(fromBoxId).val());
+            var to = new Date($(toBoxId).val());
 
-        $("#Rent").val(rentPrice.toString());
-    }
+            var dateDifferenceInDays = (to.getTime() - from.getTime()) / (24*60*60*1000);
+            var rentPrice = @Model.Movie.Price * (dateDifferenceInDays + 1);
 
-    $("#To").change(calculateRentPrice);
-    $("#From").change(calculateRentPrice);
-        </script>
-    }
+            $(rentBoxId).val(rentPrice.toString());
+        }
+
+        $(toBoxId).change(calculateRentPrice);
+        $(fromBoxId).change(calculateRentPrice);
+    </script>
+}
