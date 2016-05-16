@@ -48,7 +48,7 @@ namespace MovieRental.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Movies");
+                return HttpNotFound();
             }
         }
 
@@ -82,7 +82,7 @@ namespace MovieRental.Controllers
                 }
                 else
                 {
-                    // TODO: Redirect to the error page
+                    return View("Error");
                 }
             }
 
