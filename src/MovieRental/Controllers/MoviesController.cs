@@ -28,11 +28,16 @@ namespace MovieRental.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Movie movie = db.Movies.Find(id);
             if (movie == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.CanBeOrdered = db.Orders
+                                     .Where(order => order.To < DateTime.Now)
+                                     .All(order => order.MovieId != id);
             return View(movie);
         }
 

@@ -69,7 +69,11 @@
     </dl>
 </div>
 <div class="btn-group">
-    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Orders", new { movieId = Model.Id })'">
+    <button type="button"
+            class="btn btn-default"
+            onclick="location.href='@Url.Action("Create", "Orders", new { movieId = Model.Id })'"
+            @(ViewBag.CanBeOrdered ? "" : "disabled")
+    >
         Order the movie
     </button>
     <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Edit", new { id = Model.Id })'">

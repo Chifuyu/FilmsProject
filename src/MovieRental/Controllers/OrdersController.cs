@@ -57,28 +57,36 @@ namespace MovieRental.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(/*[Bind(Include = "Id,From,To,Rent,Comment")]*/ Order order)
+        public ActionResult Create(Order order)
         {
             if (ModelState.IsValid)
             {
-                var owner = db.Clients.FirstOrDefault(
-                    client => client.FirstName == order.Owner.FirstName
-                           && client.LastName == order.Owner.LastName
-                           && client.PhoneNumber == order.Owner.PhoneNumber
-                );
-
-                if (owner != null)
+                var movieIsFree = db.Orders
+                                    .Where(otherOrder => otherOrder.To < order.From)
+                                    .All(otherOrder => otherOrder.MovieId != order.MovieId);
+                if (movieIsFree)
                 {
-                    order.Owner = owner;
+                    var owner = db.Clients.FirstOrDefault(
+                        client => client.FirstName == order.Owner.FirstName
+                               && client.LastName == order.Owner.LastName
+                               && client.PhoneNumber == order.Owner.PhoneNumber
+                    );
+
+                    if (owner != null)
+                    {
+                        order.Owner = owner;
+                    }
+
+                    db.Orders.Add(order);
+                    db.SaveChanges();
                 }
-
-                db.Orders.Add(order);
-                db.SaveChanges();
-
-                return RedirectToAction("Index");
+                else
+                {
+                    // TODO: Redirect to the error page
+                }
             }
 
-            return View(order);
+            return View("Details", order);
         }
 
         // GET: Orders/Edit/5
