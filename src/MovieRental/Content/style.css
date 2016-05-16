@@ -3,6 +3,39 @@
     background-image: url("Images/Up.jpg");
     color: white;
 }
+/* Header items */
+a.header-item-brand 
+{ 
+    color: yellow;
+    background-image: linear-gradient(#34353d, #1b1c1f);
+    -webkit-transition: all 2s ease;
+    -moz-transition: all 2s ease;
+    -ms-transition: all 2s ease;
+    -o-transition: all 2s ease;
+    transition: all 2s ease;
+}
+a.header-item-brand:active { color: yellow }
+a.header-item-brand:link { color: yellow }
+a.header-item-brand:visited { color: yellow }
+a.header-item-brand:hover{
+    color: red;
+}
+
+div > ul > li > a.header-item { 
+    color: yellow;
+    background-image: linear-gradient(#34353d, #1b1c1f);
+    -webkit-transition: all 2s ease;
+    -moz-transition: all 2s ease;
+    -ms-transition: all 2s ease;
+    -o-transition: all 2s ease;
+    transition: all 2s ease;
+}
+div > ul > li > a.header-item:active { color: yellow }
+div > ul > li > a.header-item:link { color: yellow }
+div > ul > li > a.header-item:visited { color: yellow}
+div > ul > li > a.header-item:hover{
+    color: red;
+}
 
 /* Main Theme */
 .movies-theme
@@ -17,12 +50,15 @@
     background-attachment: fixed;
     background-color: #69778b;
 }
+
+/*Main form - is shift from top to 50 px*/
 .movies-index
 {
     margin-top: 50px;
     background-image: linear-gradient(#ffffff, #d9dccc);
 }
 
+/* zoom img - for image zooming :) */
 .zoom img {
     background-size: contain;
     width: 100px;
@@ -40,4 +76,15 @@
     width: 300%;
     position: relative;
     box-shadow: 0 0 40px rgba(67, 70, 32, 0.60), inset 0 0 40px rgb(236, 242, 101);
+}
+
+/* The blocks - different size of width */
+.full-width
+{
+    width: 100%;
+}
+
+.half-width
+{
+    width: 50%;
 }
