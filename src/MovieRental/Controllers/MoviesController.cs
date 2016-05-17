@@ -13,6 +13,8 @@ namespace MovieRental.Controllers
 {
     public class MoviesController : Controller
     {
+        public readonly int MaxMovieDescriptionLength = 200;
+
         private Context db = new Context();
 
         // GET: Movies
@@ -97,6 +99,7 @@ namespace MovieRental.Controllers
                     break;
             }
 
+            result.ForEach(movie => movie.Description = movie.Description.Substring(0, Math.Min(movie.Description.Length, MaxMovieDescriptionLength)) + "...");
             return View(result);
         }
 
