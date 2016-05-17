@@ -216,9 +216,14 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\dumb-dumber.jpg" />
     <Content Include="Content\Images\dinner-for-shcmunks.jpg" />
+    <Content Include="Content\Images\dumb-dumber.jpg" />
     <Content Include="Content\Images\eternal-sunshine.jpg" />
+    <Content Include="Content\Images\lock-stock-barrels.jpg" />
+    <Content Include="Content\Images\pulp-fiction.jpg" />
+    <Content Include="Content\Images\requiem.jpg" />
+    <Content Include="Content\Images\totoro.jpg" />
+    <Content Include="Content\Images\zootopia.jpg" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
