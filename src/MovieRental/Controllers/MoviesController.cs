@@ -16,9 +16,114 @@ namespace MovieRental.Controllers
         private Context db = new Context();
 
         // GET: Movies
-        public ActionResult Index()
+        /*public ActionResult Index()
         {
-            return View(db.Movies.ToList());
+            var movies = db.Movies.ToList();
+            ViewBag.Movies = movies;
+            ViewBag.Years = GetList(movies, x => { return x.Year; });
+            ViewBag.Genres = db.Genres.ToList();
+            ViewBag.Directors = db.Directors.ToList();
+            ViewBag.Actors = db.Actors.ToList();
+            ViewBag.Prices = GetList(movies, x => { return x.Price; });
+            ViewBag.Ratings = GetList(movies, x => { return x.Rating; });
+
+            return View(movies);
+        }*/
+
+        public ActionResult Index(string value, int type)
+        {
+            var result = new List<Movie>();
+            var movies = db.Movies.ToList();
+            ViewBag.Movies = movies;
+            ViewBag.Years = GetList(movies, x => { return x.Year; });
+            ViewBag.Genres = db.Genres.ToList();
+            ViewBag.Directors = db.Directors.ToList();
+            ViewBag.Actors = db.Actors.ToList();
+            ViewBag.Prices = GetList(movies, x => { return x.Price; });
+            ViewBag.Ratings = GetList(movies, x => { return x.Rating; });
+
+            System.Diagnostics.Debug.WriteLine(value);
+            switch (type)
+            {
+                case 0:
+                    if (value == null)
+                    {
+                        result.AddRange(movies);
+                    }
+                    else
+                    {
+                        foreach (var item in movies)
+                        {
+                            if (item.Name.ToLower().Contains(value.ToLower()))
+                                result.Add(item);
+                            System.Diagnostics.Debug.WriteLine(String.Format("{0} is that {1} in {2}", item.Name.Contains(value), value, item.Name));
+                        }
+                    }
+                    break;
+                case 1:
+                    SortMoviesList(ref result, movies, x => { return x.Year == Int32.Parse(value); });
+                    break;
+                case 2:
+                    SortMoviesList(ref result, movies, x => {
+                        foreach (var item in x.ListOfGenres)
+                            if (item.Id == Int32.Parse(value))
+                                return true;
+
+                        return false;
+                    });
+                    break;
+                case 3:
+                    SortMoviesList(ref result, movies, x => {
+                        foreach (var item in x.Directors)
+                            if (item.Id == Int32.Parse(value))
+                                return true;
+
+                        return false;
+                    });
+                    break;
+                case 4:
+                    SortMoviesList(ref result, movies, x => {
+                        foreach (var item in x.Actors)
+                            if (item.Id == Int32.Parse(value))
+                                return true;
+
+                        return false;
+                    });
+                    break;
+                case 5:
+                    SortMoviesList(ref result, movies, x => { return x.Price == Int32.Parse(value); });
+                    break;
+                case 6:
+                    SortMoviesList(ref result, movies, x => { return x.Rating == Int32.Parse(value); });
+                    break;
+            }
+
+            return View(result);
+        }
+
+        public List<int> GetList(List<Movie> movies, Func<Movie, int> func)
+        {
+            var result = new List<int>();
+
+            foreach (var item in movies)
+            {
+                if (result.IndexOf(func(item)) != -1)
+                    continue;
+
+                result.Add(func(item));
+            }
+            result.Sort();
+
+            return result;
+        }
+        
+        public void SortMoviesList(ref List<Movie> result, List<Movie> movies, Predicate<Movie> pred)
+        {
+            foreach (var item in movies)
+            {
+                if (pred(item))
+                    result.Add(item);
+            }
         }
 
         // GET: Movies/Details/5
