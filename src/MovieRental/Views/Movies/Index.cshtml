@@ -49,18 +49,8 @@
                 <option value="@item.Id">@item.FirstName @item.LastName</option>
             }
         </select>
-        <select id="prices_list">
-            @foreach (var item in ViewBag.Prices)
-            {
-                <option value="@item">@item</option>
-            }
-        </select>
-        <select id="ratings_list">
-            @foreach (var item in ViewBag.Ratings)
-            {
-                <option value="@item">@item</option>
-            }
-        </select>
+        <input type="text" name="Price" id="movie_price">
+        <input type="text" name="Raiting" id="movie_rating">
         <button type="button" class="btn btn-default buttons" id="submit_button">
             Show
         </button>
@@ -71,8 +61,8 @@
     $('#genres_list').hide();
     $('#directors_list').hide();
     $('#actors_list').hide();
-    $('#prices_list').hide();
-    $('#ratings_list').hide();
+    $('#movie_price').hide();
+    $('#movie_rating').hide();
 </script>
 <div>
 <table class="table">
@@ -148,8 +138,8 @@
         $('#genres_list').hide();
         $('#directors_list').hide();
         $('#actors_list').hide();
-        $('#prices_list').hide();
-        $('#ratings_list').hide();
+        $('#movie_price').hide();
+        $('#movie_rating').hide();
 
         if ($(this).val() === '0') {
             $('#movie_name').show();
@@ -162,9 +152,9 @@
         } else if ($(this).val() === '4') {
             $('#actors_list').show();
         } else if ($(this).val() === '5') {
-            $('#prices_list').show();
+            $('#movie_price').show();
         } else if ($(this).val() === '6') {
-            $('#ratings_list').show();
+            $('#movie_rating').show();
         };
     });
 
@@ -190,10 +180,10 @@
                 window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#actors_list').val() + '&type=4';
                 break;
             case 5:
-                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#prices_list').val() + '&type=5';
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#movie_price').val() + '&type=5';
                 break;
             case 6:
-                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#ratings_list').val() + '&type=6';
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#movie_rating').val() + '&type=6';
                 break;
         }
     });

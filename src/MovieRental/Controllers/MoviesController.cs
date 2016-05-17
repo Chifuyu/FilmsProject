@@ -34,7 +34,6 @@ namespace MovieRental.Controllers
         {
             var result = new List<Movie>();
             var movies = db.Movies.ToList();
-            ViewBag.Movies = movies;
             ViewBag.Years = GetList(movies, x => { return x.Year; });
             ViewBag.Genres = db.Genres.ToList();
             ViewBag.Directors = db.Directors.ToList();
@@ -91,10 +90,10 @@ namespace MovieRental.Controllers
                     });
                     break;
                 case 5:
-                    SortMoviesList(ref result, movies, x => { return x.Price == Int32.Parse(value); });
+                    SortMoviesList(ref result, movies, x => { return x.Price <= Int32.Parse(value); });
                     break;
                 case 6:
-                    SortMoviesList(ref result, movies, x => { return x.Rating == Int32.Parse(value); });
+                    SortMoviesList(ref result, movies, x => { return x.Rating >= Int32.Parse(value); });
                     break;
             }
 
