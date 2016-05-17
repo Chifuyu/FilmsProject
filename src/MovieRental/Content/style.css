@@ -8,6 +8,7 @@ a.header-item-brand
 { 
     color: yellow;
     background-image: linear-gradient(#34353d, #1b1c1f);
+    border-bottom: solid #1b1c1f;
     -webkit-transition: all 2s ease;
     -moz-transition: all 2s ease;
     -ms-transition: all 2s ease;
@@ -17,13 +18,21 @@ a.header-item-brand
 a.header-item-brand:active { color: yellow }
 a.header-item-brand:link { color: yellow }
 a.header-item-brand:visited { color: yellow }
-a.header-item-brand:hover{
+a.header-item-brand:visited:hover
+{ 
+    color: greenyellow;
+}
+a.header-item-brand:hover
+{
     color: red;
+    border-bottom: solid yellow;
+    box-shadow: 0px 10px 15px -8px rgba(255, 250, 27, 0.80);
 }
 
 div > ul > li > a.header-item { 
     color: yellow;
     background-image: linear-gradient(#34353d, #1b1c1f);
+    border-bottom: solid #1b1c1f;
     -webkit-transition: all 2s ease;
     -moz-transition: all 2s ease;
     -ms-transition: all 2s ease;
@@ -33,8 +42,15 @@ div > ul > li > a.header-item {
 div > ul > li > a.header-item:active { color: yellow }
 div > ul > li > a.header-item:link { color: yellow }
 div > ul > li > a.header-item:visited { color: yellow}
-div > ul > li > a.header-item:hover{
-    color: red;
+div > ul > li > a.header-item:visited:hover
+{
+    color: greenyellow;
+}
+div > ul > li > a.header-item:hover
+{
+    color: greenyellow;
+    border-bottom: solid yellow;
+    box-shadow: 0px 10px 10px -7px rgba(255, 250, 27, 0.80);
 }
 
 /* Main Theme */
@@ -46,9 +62,10 @@ div > ul > li > a.header-item:hover{
     width: 800px;
     height: 100%;
     background-image: linear-gradient(#34353d, #1b1c1f);
-    background-repeat: no-repeat;
+    /*background-repeat:repeat-y;*/
     background-attachment: fixed;
-    background-color: #69778b;
+    background-color: #34353d;
+    background-size: 100% ;
 }
 
 /*Main form - is shift from top to 50 px*/
@@ -59,7 +76,8 @@ div > ul > li > a.header-item:hover{
 }
 
 /* zoom img - for image zooming :) */
-.zoom img {
+/* This version for IE 1.0 */
+.zoom-old img{
     background-size: contain;
     width: 100px;
     position: relative;
@@ -69,8 +87,7 @@ div > ul > li > a.header-item:hover{
     -o-transition: all 2s ease;
     transition: all 2s ease;
 }
-
-.zoom img:hover {
+.zoom-old img:hover {
     background-size: contain;
     margin-left: -50%;
     width: 300%;
@@ -78,6 +95,50 @@ div > ul > li > a.header-item:hover{
     box-shadow: 0 0 40px rgba(67, 70, 32, 0.60), inset 0 0 40px rgb(236, 242, 101);
 }
 
+/* This version for IE 4.0 */
+.zoom img {
+    height: 250px;
+    position: absolute;
+    z-index: 1;
+    -webkit-transition: all 2s ease;
+    -moz-transition: all 2s ease;
+    -ms-transition: all 2s ease;
+    -o-transition: all 2s ease;
+    transition: all 2s ease;
+}
+.zoom img:hover {
+    display: block;
+    margin: -10% 0 0px 0px;
+    height: 80%;  /* 8X */
+    position:absolute;
+    z-index: 100;
+    box-shadow: 0 0 40px rgba(67, 70, 32, 0.60), inset 0 0 40px rgb(236, 242, 101);
+}
+
+/* This is td style for image*/
+.img-in-td-width{
+    height: 270px;
+    width: 25%;
+}
+
+/* This is td style for movie-name*/
+.movie-name{
+    text-align: center;
+    background-color:#1b1c1f;
+    color: white;
+    font-size: large;
+}
+
+/* This is td style for price*/
+.movie-price{
+    text-align: center;
+    font-weight: bold;
+}
+/* This is td style for count*/
+.movie-count{
+    text-align: center;
+    font-weight: bold;
+}
 /* The blocks - different size of width */
 .full-width
 {
