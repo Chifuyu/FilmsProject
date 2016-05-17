@@ -16,13 +16,13 @@
 	</p>
     <div>
         <select id="list">
-            <option selected value="0">По имени</option>
-            <option value="1">По году выпуска</option>
-            <option value="2">По жанру</option>
-            <option value="3">По режиссерам</option>
-            <option value="4">По Актерам</option>
-            <option value="5">По стоимости</option>
-            <option value="6">По рейтингу</option>
+            <option selected value="0">By Name</option>
+            <option value="1">By Year</option>
+            <option value="2">By Genre</option>
+            <option value="3">By Directors</option>
+            <option value="4">By Actors</option>
+            <option value="5">By Price</option>
+            <option value="6">By Rating</option>
         </select>
         <input type="text" name="Movie Name" id="movie_name">
         <select id="years_list">
@@ -165,25 +165,25 @@
         switch (parseInt($('#list').val(), 10))
         {
             case 0:
-                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#movie_name').val() + '&type=0';
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#movie_name').val() + '&type=1';
                 break;
             case 1:
-                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#years_list').val() + '&type=1';
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#years_list').val() + '&type=2';
                 break;
             case 2:
-                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#genres_list').val() + '&type=2';
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#genres_list').val() + '&type=3';
                 break;
             case 3:
-                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#directors_list').val() + '&type=3';
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#directors_list').val() + '&type=4';
                 break;
             case 4:
-                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#actors_list').val() + '&type=4';
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#actors_list').val() + '&type=5';
                 break;
             case 5:
-                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#movie_price').val() + '&type=5';
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#movie_price').val() + '&type=6';
                 break;
             case 6:
-                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#movie_rating').val() + '&type=6';
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#movie_rating').val() + '&type=7';
                 break;
         }
     });

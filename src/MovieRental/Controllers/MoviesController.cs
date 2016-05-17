@@ -13,119 +13,111 @@ namespace MovieRental.Controllers
 {
     public class MoviesController : Controller
     {
-        public readonly int MaxMovieDescriptionLength = 200;
+        public static readonly int MaxMovieDescriptionLength = 200;
+
+        public enum MovieFilterType
+        {
+            None = 0,
+            ByName,
+            ByYear,
+            ByGenre,
+            ByDirector,
+            ByActor,
+            ByMaximalPrice,
+            ByMinRating
+        }
 
         private Context db = new Context();
 
-        // GET: Movies
-        /*public ActionResult Index()
+        // GET: Movies/Index?value=Matrix&type=1
+        public ActionResult Index(string value, MovieFilterType type)
         {
-            var movies = db.Movies.ToList();
-            ViewBag.Movies = movies;
-            ViewBag.Years = GetList(movies, x => { return x.Year; });
             ViewBag.Genres = db.Genres.ToList();
             ViewBag.Directors = db.Directors.ToList();
             ViewBag.Actors = db.Actors.ToList();
-            ViewBag.Prices = GetList(movies, x => { return x.Price; });
-            ViewBag.Ratings = GetList(movies, x => { return x.Rating; });
+            ViewBag.Years = db.Movies.Select(movie => movie.Year).Distinct().ToList();
+            ViewBag.Years.Sort();
 
-            return View(movies);
-        }*/
-
-        public ActionResult Index(string value, int type)
-        {
-            var result = new List<Movie>();
             var movies = db.Movies.ToList();
-            ViewBag.Years = GetList(movies, x => { return x.Year; });
-            ViewBag.Genres = db.Genres.ToList();
-            ViewBag.Directors = db.Directors.ToList();
-            ViewBag.Actors = db.Actors.ToList();
-            ViewBag.Prices = GetList(movies, x => { return x.Price; });
-            ViewBag.Ratings = GetList(movies, x => { return x.Rating; });
 
-            System.Diagnostics.Debug.WriteLine(value);
             switch (type)
             {
-                case 0:
-                    if (value == null)
+                case MovieFilterType.None:
+                    break;
+
+                case MovieFilterType.ByName:
+                    if (value != null && !string.IsNullOrWhiteSpace(value))
                     {
-                        result.AddRange(movies);
-                    }
-                    else
-                    {
-                        foreach (var item in movies)
-                        {
-                            if (item.Name.ToLower().Contains(value.ToLower()))
-                                result.Add(item);
-                            System.Diagnostics.Debug.WriteLine(String.Format("{0} is that {1} in {2}", item.Name.Contains(value), value, item.Name));
-                        }
+                        var searchString = value.Trim(' ').ToLower();
+                        movies = movies.Where(movie => movie.Name.ToLower().Contains(searchString)).ToList();
                     }
                     break;
-                case 1:
-                    SortMoviesList(ref result, movies, x => { return x.Year == Int32.Parse(value); });
-                    break;
-                case 2:
-                    SortMoviesList(ref result, movies, x => {
-                        foreach (var item in x.ListOfGenres)
-                            if (item.Id == Int32.Parse(value))
-                                return true;
 
-                        return false;
-                    });
+                case MovieFilterType.ByYear:
+                    int yearToFind;
+                    if (int.TryParse(value, out yearToFind))
+                    {
+                        movies = movies.Where(movie => movie.Year == yearToFind).ToList();
+                    }
                     break;
-                case 3:
-                    SortMoviesList(ref result, movies, x => {
-                        foreach (var item in x.Directors)
-                            if (item.Id == Int32.Parse(value))
-                                return true;
 
-                        return false;
-                    });
+                case MovieFilterType.ByGenre:
+                    int genreId;
+                    if (int.TryParse(value, out genreId))
+                    {
+                        movies = db.Genres.FirstOrDefault(genre => genre.Id == genreId)?.Movies.ToList() ?? new List<Movie>();
+                    }
                     break;
-                case 4:
-                    SortMoviesList(ref result, movies, x => {
-                        foreach (var item in x.Actors)
-                            if (item.Id == Int32.Parse(value))
-                                return true;
 
-                        return false;
-                    });
+                case MovieFilterType.ByDirector:
+                    int directorId;
+                    if (int.TryParse(value, out directorId))
+                    {
+                        movies = db.Directors.FirstOrDefault(director => director.Id == directorId)?.Movies.ToList() ?? new List<Movie>();
+                    }
                     break;
-                case 5:
-                    SortMoviesList(ref result, movies, x => { return x.Price <= Int32.Parse(value); });
+
+                case MovieFilterType.ByActor:
+                    int actorId;
+                    if (int.TryParse(value, out actorId))
+                    {
+                        movies = db.Actors.FirstOrDefault(actor => actor.Id == actorId)?.Movies.ToList() ?? new List<Movie>();
+                    }
                     break;
-                case 6:
-                    SortMoviesList(ref result, movies, x => { return x.Rating >= Int32.Parse(value); });
+
+                case MovieFilterType.ByMaximalPrice:
+                    int maximumPrice;
+                    if (int.TryParse(value, out maximumPrice))
+                    {
+                        movies = movies.Where(movie => movie.Price <= maximumPrice).ToList();
+                    }
+                    break;
+
+                case MovieFilterType.ByMinRating:
+                    int minimumRating;
+                    if (int.TryParse(value, out minimumRating))
+                    {
+                        movies = movies.Where(movie => movie.Rating >= minimumRating).ToList();
+                    }
+                    break;
+
+                default:
                     break;
             }
 
-            result.ForEach(movie => movie.Description = movie.Description.Substring(0, Math.Min(movie.Description.Length, MaxMovieDescriptionLength)) + "...");
-            return View(result);
-        }
-
-        public List<int> GetList(List<Movie> movies, Func<Movie, int> func)
-        {
-            var result = new List<int>();
-
-            foreach (var item in movies)
+            foreach (var movie in movies)
             {
-                if (result.IndexOf(func(item)) != -1)
-                    continue;
+                if (movie.Description.Length > MaxMovieDescriptionLength)
+                {
+                    var shortDescription = movie.Description
+                                                .Substring(0, MaxMovieDescriptionLength)
+                                                .TrimEnd(' ', ',', '.', ':', ';');
 
-                result.Add(func(item));
+                    movie.Description = shortDescription + "...";
+                }
             }
-            result.Sort();
 
-            return result;
-        }
-        
-        public void SortMoviesList(ref List<Movie> result, List<Movie> movies, Predicate<Movie> pred)
-        {
-            foreach (var item in movies)
-            {
-                if (pred(item))
-                    result.Add(item);
-            }
+            return View(movies);
         }
 
         // GET: Movies/Details/5
