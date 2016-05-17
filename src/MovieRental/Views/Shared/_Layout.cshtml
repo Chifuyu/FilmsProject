@@ -18,11 +18,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Movie rental", "Index", "Movies", new { area = "" }, new { @class = "navbar-brand header-item-brand" })
+                @Html.ActionLink("Movie rental", "Index", "Movies", new { area = "", value = "", type = 0 }, new { @class = "navbar-brand header-item-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Movies", "Index", "Movies", null, new { @class = "header-item" })</li>
+                    <li>@Html.ActionLink("Movies", "Index", "Movies", new { value = "", type = 0 }, new { @class = "header-item" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", null, new { @class = "header-item" })</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "header-item" })</li>
                 </ul>

@@ -79,7 +79,7 @@
     <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Edit", new { id = Model.Id })'">
         Edit
     </button>
-    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index")'">
+    <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index", new { value = "", type = 0 })'">
         Back to List
     </button>
 </div>
