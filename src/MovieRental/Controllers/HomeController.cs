@@ -12,7 +12,17 @@ namespace MovieRental.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Movies");
+            return RedirectToAction("Index", "Movies", new { value = "", type = 0 });
+        }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
         }
     }
 }

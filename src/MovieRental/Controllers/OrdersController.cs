@@ -36,10 +36,20 @@ namespace MovieRental.Controllers
             return View(order);
         }
 
-        // GET: Orders/Create
-        public ActionResult Create()
+        // GET: Orders/Create?movieId=5
+        public ActionResult Create(int movieId)
         {
-            return View();
+            var movie = db.Movies.Find(movieId);
+
+            if (movie != null)
+            {
+                var order = new Order { Movie = movie, MovieId = movieId, Owner = new Client() };
+                return View(order);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
 
         // POST: Orders/Create
@@ -47,16 +57,36 @@ namespace MovieRental.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,From,To,Rent,Comment")] Order order)
+        public ActionResult Create(Order order)
         {
             if (ModelState.IsValid)
             {
-                db.Orders.Add(order);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var movieIsFree = db.Orders
+                                    .Where(otherOrder => otherOrder.To < order.From)
+                                    .All(otherOrder => otherOrder.MovieId != order.MovieId);
+                if (movieIsFree)
+                {
+                    var owner = db.Clients.FirstOrDefault(
+                        client => client.FirstName == order.Owner.FirstName
+                               && client.LastName == order.Owner.LastName
+                               && client.PhoneNumber == order.Owner.PhoneNumber
+                    );
+
+                    if (owner != null)
+                    {
+                        order.Owner = owner;
+                    }
+
+                    db.Orders.Add(order);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    return View("Error");
+                }
             }
 
-            return View(order);
+            return View("Details", order);
         }
 
         // GET: Orders/Edit/5
@@ -84,7 +114,7 @@ namespace MovieRental.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(order).State = EntityState.Modified;
-                db.SaveChanges();
+                db.SaveChanges(); //exception when save modified order!
                 return RedirectToAction("Index");
             }
             return View(order);

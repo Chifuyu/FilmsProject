@@ -1,41 +1,137 @@
 ﻿@model IEnumerable<MovieRental.Models.Movie>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Movies";
 }
 
-<h2>Index</h2>
+<h2>Movies</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+<div>
+    <p>
+    <button type="button" class="btn btn- buttons" onclick="location.href='@Url.Action("Create", "Movies")'">
+        Create New <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+	</p>
+    <div>
+        <select id="list">
+            <option selected value="0">By Name</option>
+            <option value="1">By Year</option>
+            <option value="2">By Genre</option>
+            <option value="3">By Directors</option>
+            <option value="4">By Actors</option>
+            <option value="5">By Price</option>
+            <option value="6">By Rating</option>
+        </select>
+        <input type="text" name="Movie Name" id="movie_name">
+        <select id="years_list">
+            @foreach (var item in ViewBag.Years)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+        <select id="genres_list">
+            @foreach (var item in ViewBag.Genres)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+        <select id="directors_list">
+            @foreach (var item in ViewBag.Directors)
+            {
+                <option value="@item.Id">@item.FirstName @item.LastName</option>
+            }
+        </select>
+        <select id="actors_list">
+            @foreach (var item in ViewBag.Actors)
+            {
+                <option value="@item.Id">@item.FirstName @item.LastName</option>
+            }
+        </select>
+        <input type="text" name="Price" id="movie_price">
+        <input type="text" name="Raiting" id="movie_rating">
+        <button type="button" class="btn btn-default buttons" id="submit_button">
+            Show  <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#years_list').hide();
+    $('#genres_list').hide();
+    $('#directors_list').hide();
+    $('#actors_list').hide();
+    $('#movie_price').hide();
+    $('#movie_rating').hide();
+</script>
+<div>
 <table class="table">
+    @foreach (var item in Model)
+    {
+    <!--      New tabel View       -->
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Year)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model =>  model.Logo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Count)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
+        <th colspan="3" class="movie-name">@Html.DisplayFor(modelItem => item.Name)</th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+        <tr>
+            <td rowspan="3" class="img-in-td-width">
+                <div class="zoom img">
+                    <img src="@Url.Content(item.Logo)" />
+                </div>
+            </td>
+            <td>
+                Year: @Html.DisplayFor(modelItem => item.Year)
+                <br>
+                Rating: @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td rowspan="3">
+                <div class="movie-price">
+                    Price: <text style="color:red">@Html.DisplayFor(modelItem => item.Price)</text>
+</div>
+                <div class="movie-count">
+                    Count: @Html.DisplayFor(modelItem => item.Count)
+                </div>
+                <br>
+                <div>
+                    <button type="button" class="btn btn-default buttons full-width" onclick="location.href='@Url.Action("Edit", new { id = item.Id })'">
+                        Edit <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button type="button" class="btn btn-default buttons full-width" onclick="location.href='@Url.Action("Details", new { id = item.Id })'">
+                        Details <span class="glyphicon glyphicon-film"></span>
+                    </button>
+                    <button type="button" class="btn btn-default buttons full-width" onclick="location.href='@Url.Action("Delete", new { id = item.Id })'">
+                        Delete <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Directors: 
+                    @for(int i = 0; i < item.Directors.Count; i++)
+                    {
+                         @(item.Directors.ElementAt(i).FirstName.ToString() + " " + item.Directors.ElementAt(i).LastName.ToString())
+                        if(i < item.Directors.Count - 1)
+                        {
+                            @(", ")
+                        }
+                    }
+            </td>
+        </tr>
+        <tr>
+            <td>Actors:
+                    @for (int i = 0; i < item.Actors.Count; i++)
+                    {
+                        @(item.Actors.ElementAt(i).FirstName.ToString() + " " + item.Actors.ElementAt(i).LastName.ToString())
+                        if (i < item.Actors.Count - 1)
+                        {
+                            @(", ")
+                        }
+                    }
+            </td>
+        </tr>
+        <th colspan="3">Description: @Html.DisplayFor(modelItem => item.Description)</th>
+    <!--//////////////////////////////-->
+    <!--
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -50,7 +146,9 @@
             @Html.DisplayFor(modelItem => item.Rating)
         </td>
         <td>
-            <img src="@Url.Content(item.Logo)" width=100 />
+            <div class="zoom img">
+                <img src="@Url.Content(item.Logo)" />
+            </div>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Count)
@@ -59,11 +157,76 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            <button type="button" class="btn btn-default buttons full-width" onclick="location.href='@Url.Action("Edit", new { id = item.Id })'">
+                Edit
+            </button>
+            <button type="button" class="btn btn-default buttons full-width" onclick="location.href='@Url.Action("Details", new { id = item.Id })'">
+                Details
+            </button>
+            <button type="button" class="btn btn-default buttons full-width" onclick="location.href='@Url.Action("Delete", new { id = item.Id })'">
+                Delete
+            </button>
         </td>
     </tr>
+    -->
 }
 
 </table>
+</div>
+<script type="text/javascript">
+    $('#list').change(function () {
+        $('#movie_name').hide();
+        $('#years_list').hide();
+        $('#genres_list').hide();
+        $('#directors_list').hide();
+        $('#actors_list').hide();
+        $('#movie_price').hide();
+        $('#movie_rating').hide();
+
+        if ($(this).val() === '0') {
+            $('#movie_name').show();
+        } else if ($(this).val() === '1') {
+            $('#years_list').show();
+        } else if ($(this).val() === '2') {
+            $('#genres_list').show();
+        } else if ($(this).val() === '3') {
+            $('#directors_list').show();
+        } else if ($(this).val() === '4') {
+            $('#actors_list').show();
+        } else if ($(this).val() === '5') {
+            $('#movie_price').show();
+        } else if ($(this).val() === '6') {
+            $('#movie_rating').show();
+        };
+    });
+
+    /*$('#actors_list').change(function () {
+        window.location.href = 'Url.Action("Index", "Movies")' + '?value=' + $(this).val() + '&type=4';
+    });*/
+    $('#submit_button').click(function () {
+        switch (parseInt($('#list').val(), 10))
+        {
+            case 0:
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#movie_name').val() + '&type=1';
+                break;
+            case 1:
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#years_list').val() + '&type=2';
+                break;
+            case 2:
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#genres_list').val() + '&type=3';
+                break;
+            case 3:
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#directors_list').val() + '&type=4';
+                break;
+            case 4:
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#actors_list').val() + '&type=5';
+                break;
+            case 5:
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#movie_price').val() + '&type=6';
+                break;
+            case 6:
+                window.location.href = '@Url.Action("Index", "Movies")' + '?value=' + $('#movie_rating').val() + '&type=7';
+                break;
+        }
+    });
+</script>

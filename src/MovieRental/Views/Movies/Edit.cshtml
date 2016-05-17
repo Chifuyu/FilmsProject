@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Movie</h4>
         <hr />
@@ -75,16 +75,18 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-success buttons full-width" />
             </div>
         </div>
-    </div>
-}
+        
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index", new { value = "", type = 0 })'">
+                <span class="glyphicon glyphicon-step-backward"></span> Back to List
+            </button>
+        </div>
+  </div>
+ }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }

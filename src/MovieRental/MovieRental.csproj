@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201605121042233_name.Designer.cs">
       <DependentUpon>201605121042233_name.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605131105384_order_movie_id.cs" />
+    <Compile Include="Migrations\201605131105384_order_movie_id.Designer.cs">
+      <DependentUpon>201605131105384_order_movie_id.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -212,9 +216,14 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\dumb-dumber.jpg" />
     <Content Include="Content\Images\dinner-for-shcmunks.jpg" />
+    <Content Include="Content\Images\dumb-dumber.jpg" />
     <Content Include="Content\Images\eternal-sunshine.jpg" />
+    <Content Include="Content\Images\lock-stock-barrels.jpg" />
+    <Content Include="Content\Images\pulp-fiction.jpg" />
+    <Content Include="Content\Images\requiem.jpg" />
+    <Content Include="Content\Images\totoro.jpg" />
+    <Content Include="Content\Images\zootopia.jpg" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -253,7 +262,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Movies\Create.cshtml" />
     <Content Include="Views\Movies\Delete.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
@@ -284,6 +292,8 @@
     <Content Include="Views\Genres\Details.cshtml" />
     <Content Include="Views\Genres\Edit.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -305,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605121042233_name.resx">
       <DependentUpon>201605121042233_name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605131105384_order_movie_id.resx">
+      <DependentUpon>201605131105384_order_movie_id.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
